@@ -1,25 +1,53 @@
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        var dados = new FonteDeDados();
-        var cm = new VisualizadorDeMedia(dados.getValores());
-        var cs = new VisualizadorDeSomatorio(dados.getValores());
+    public static void main(String[] args) {
+        FonteDeDados fonte = new FonteDeDados();
 
-        Scanner s = new Scanner(System.in);
-        int valor = 0;
-        while(true){
-            System.out.println("\nEntre um valor positivo maior que zero (0=fim):");
-            valor = Integer.parseInt(s.nextLine());
-            if (valor == 0){
-                break;
+        VisualizadorDeMedia visMedia = new VisualizadorDeMedia();
+        VisualizadorDeSomatorio visSomatorio = new VisualizadorDeSomatorio();
+        VisualizadorDeMaximo visMaximo = new VisualizadorDeMaximo();
+
+        Scanner sc = new Scanner(System.in);
+        int opcao;
+
+        System.out.println("Digite números positivos para adicionar.");
+        System.out.println("Comandos especiais:");
+        System.out.println("-1 = ligar visualizador de média");
+        System.out.println("-2 = ligar visualizador de somatório");
+        System.out.println("-3 = ligar visualizador de máximo");
+        System.out.println("0  = sair");
+
+        do {
+            System.out.print("> ");
+            opcao = sc.nextInt();
+
+            switch (opcao) {
+                case -1:
+                    fonte.registrarObservador(visMedia);
+                    System.out.println("Visualizador de média ligado.");
+                    break;
+                case -2:
+                    fonte.registrarObservador(visSomatorio);
+                    System.out.println("Visualizador de somatório ligado.");
+                    break;
+                case -3:
+                    fonte.registrarObservador(visMaximo);
+                    System.out.println("Visualizador de máximo ligado.");
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    if (opcao > 0) {
+                        fonte.add(opcao);
+                    } else {
+                        System.out.println("Opção inválida.");
+                    }
+                    break;
             }
-            dados.add(valor);
-            cs.acrescentaValor(valor);
-            cm.acrescentaValor(valor);
-            cs.exibeSomatorio();
-            cm.exibeMedia();
-        }
-        System.out.println("Fim");
+        } while (opcao != 0);
+
+        sc.close();
     }
 }
