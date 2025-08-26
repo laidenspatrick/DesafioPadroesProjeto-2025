@@ -1,13 +1,13 @@
 public class ItemDeVenda {
-    private Produto produto;
+    private ProdutoComponent produto;
     private int quantidade;
 
-    public ItemDeVenda(Produto produto, int quantidade) {
+    public ItemDeVenda(ProdutoComponent produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
     }
 
-    public Produto getProduto() {
+    public ProdutoComponent getProduto() {
         return produto;
     }
 
@@ -21,7 +21,8 @@ public class ItemDeVenda {
 
     @Override
     public String toString() {
-        return String.format("%d %s %d x %.2f = %.2f%n",produto.getId(), produto.getNome(), quantidade, produto.getPreco(), getSubTotal());
+        return String.format("%d %s %d x %.2f = %.2f%n",
+                produto.getId(), produto.getNome(), quantidade, produto.getPreco(), getSubTotal());
     }
-            
 }
+

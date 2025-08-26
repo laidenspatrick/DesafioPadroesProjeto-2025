@@ -8,15 +8,14 @@ public class Produto {
         this.nome = nome;
         this.preco = preco;
     }
-
+    
     public int getId() {
         return id;
     }
-
     public String getNome() {
         return nome;
     }
-
+    
     public double getPreco() {
         return preco;
     }
